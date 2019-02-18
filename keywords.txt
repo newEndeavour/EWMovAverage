@@ -1,0 +1,6 @@
+EWMovAverage			KEYWORD1
+decay				KEYWORD2
+Noise				KEYWORD3
+Sensor				KEYWORD4
+Signal				KEYWORD5
+Filter				KEYWORD6
