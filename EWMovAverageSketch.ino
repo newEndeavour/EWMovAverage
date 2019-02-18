@@ -26,8 +26,8 @@
 #include <EWMovAverage.h>
 #include <math.h>
 
-//#define DISP_MONITOR                 1
-#define DISP_PLOTTER_MEAN            1
+#define DISP_MONITOR                 1
+//#define DISP_PLOTTER_MEAN            1
 //#define DISP_PLOTTER_SDEV           1
 
 static long double const   pi  =  3.14159265358979323846264338L;
@@ -67,11 +67,6 @@ void loop() {
 
   LoopCount++;
 
-  //We Copy EWMA2 into EWMA1 at 200 cycles
-  if (LoopCount == 500) {
-    EWMA1.Copy(EWMA2);
-  }
-
   //Generate a variable mimicking high Resonance
   Angle     = (float)(LoopCount/360.0)*pi;
   Switch    *=-1;
@@ -88,6 +83,50 @@ void loop() {
   Stdev_2 = EWMA2.Get_StdDeviation();
 
   #if defined(DISP_MONITOR)
+
+    //We Copy EWMA2 into EWMA1 at 200 cycles
+    if (LoopCount == 100) {
+      Serial.print("\nBEFORE COPY");
+      Serial.print("\nEWMA1:");
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_xi(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_xi2(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_Mean(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_Variance(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_StdDeviation(),4);
+      Serial.print("\nEWMA2:");
+      Serial.print("\nxi    :");
+      Serial.print(EWMA2.Get_xi(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA2.Get_xi2(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA2.Get_Mean(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA2.Get_Variance(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA2.Get_StdDeviation(),4);
+      
+      EWMA1.Copy(EWMA2);
+      
+      Serial.print("\nAFTER COPY");
+      Serial.print("\nEWMA1:");
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_xi(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_xi2(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_Mean(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_Variance(),4);
+      Serial.print("\nxi    :");
+      Serial.print(EWMA1.Get_StdDeviation(),4);
+      delay(3000);
+    }
+
     //-> Serial
     Serial.print("\n");
     Serial.print(LoopCount);
@@ -112,6 +151,9 @@ void loop() {
   #endif
 
   #if defined(DISP_PLOTTER_MEAN)
+    if (LoopCount == 500) 
+      EWMA1.Copy(EWMA2);
+
     //RAW
     Serial.print(RawSignal,4);
     Serial.print(" ");
