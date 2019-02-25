@@ -1,8 +1,8 @@
 /*
   File:         EWMovAverage.cpp
-  Version:      0.0.6
+  Version:      0.0.1
   Date:         19-Dec-2018
-  Revision:     15-Feb-2019
+  Revision:     18-Feb-2019
   Author:       Jerome Drouin (jerome.p.drouin@gmail.com)
 
   Editions:	Please go to EWMovAverage.h for Edition Notes.
@@ -60,6 +60,20 @@ EWMovAverage::EWMovAverage(float _decay)
 
 
 // Public Methods //////////////////////////////////////////////////////////////
+// Returns the Version
+String EWMovAverage::GetVersion()
+{
+	return VER_EWMovAverage;
+}
+
+
+// Returns the Release Date
+String EWMovAverage::GetReleaseDate()
+{
+	return REL_EWMovAverage;
+}
+
+
 //Set the moment decay
 void EWMovAverage::Setdecay(float _decay)
 {

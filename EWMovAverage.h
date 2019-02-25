@@ -38,9 +38,14 @@
 
 #include "Arduino.h"
 
-#define INITIAL_AUTOCAL_FREQ	     1000	// Autocalibration Frequency 5 secs
-#define MINdecayPARAM 		0	// 
-#define MAXdecayPARAM 	      	1	// 
+// DEFINES /////////////////////////////////////////////////////////////
+#define VER_EWMovAverage		"0.0.1"		//
+#define REL_EWMovAverage		"18Feb2019"	//
+
+
+#define INITIAL_AUTOCAL_FREQ	  	1000	// Autocalibration Frequency 5 secs
+#define MINdecayPARAM 			0	// 
+#define MAXdecayPARAM 	      		1	// 
 
 
 // library interface description
@@ -71,6 +76,10 @@ class EWMovAverage
 
 	void 	Set_Autocal_Millis(unsigned long autoCal_millis);
 	unsigned long Get_Autocal_Millis(void);
+
+	String 	GetVersion();
+	String 	GetReleaseDate();
+
 
   // library-accessible "private" interface
   private:
